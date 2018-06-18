@@ -51,8 +51,10 @@ public class FragmentCreatePool extends Fragment {
     private TextView mPoolStartDate;
     private EditText mPoolDepositDate;
     private EditText mPoolMeetUpDate;
+    private EditText poolRules;
     private EditText mPoolLateFee;
     private Button mRegisterPool;
+
     private java.sql.Date endDateSql;
     private java.sql.Date startDateSql;
     private SharedPreferences mSharedPreferences;
@@ -62,7 +64,6 @@ public class FragmentCreatePool extends Fragment {
     private AlertDialog.Builder alertdialogBuilder;
     private AlertDialog alertDialog;
     private DateCalculationsUtil dateCalculationsUtil;
-    private EditText poolRules;
     private DatePickerDialog.OnDateSetListener dateSetListener;
 
 
@@ -229,6 +230,9 @@ public class FragmentCreatePool extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 createPoolinDb();
+                Intent intent = new Intent(getContext(), LandingPage.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
         AlertDialog alertDialog = alertdialogBuilder.create();

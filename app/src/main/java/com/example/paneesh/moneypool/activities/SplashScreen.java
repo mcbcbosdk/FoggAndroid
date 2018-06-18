@@ -17,11 +17,14 @@ import com.example.paneesh.moneypool.database_helper.MemberOperations;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private ImageView mLogo;
     private TextView appName;
     private TextView caption;
+
+    private ImageView mLogo;
+
     private Animation fromTop;
     private Animation fromBottom;
+
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private MemberOperations memberOperations;

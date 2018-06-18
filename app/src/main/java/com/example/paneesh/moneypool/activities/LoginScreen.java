@@ -19,12 +19,14 @@ import com.example.paneesh.moneypool.database_helper.MemberOperations;
 public class LoginScreen extends AppCompatActivity {
 
     private TextView mRegister;
+    private TextView mTextViewAlert;
     private EditText mEmail;
     private EditText mPassword;
     private Button mLogin;
+
     private String stringEmail;
     private String password;
-    private TextView mTextViewAlert;
+
     private MemberOperations databaseOperations;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -46,12 +48,12 @@ public class LoginScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (databaseOperations.loginMember(stringEmail, password)){
+                if (databaseOperations.loginMember(stringEmail, password)) {
                     saveInSharedPrefs();
                     Intent intent = new Intent(LoginScreen.this, LandingPage.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Not a valid input", Toast.LENGTH_LONG).show();
                 }
 
@@ -67,10 +69,10 @@ public class LoginScreen extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                if (checkValidInput()){
+                if (checkValidInput()) {
                     mLogin.setEnabled(true);
                     mTextViewAlert.setText("");
-                }else{
+                } else {
                     mTextViewAlert.setText(Utils.alertUserForValidInput);
                 }
             }
@@ -85,31 +87,31 @@ public class LoginScreen extends AppCompatActivity {
         mPassword.addTextChangedListener(textWatcher);
     }
 
-    private void initUI(){
+    private void initUI() {
         mRegister = findViewById(R.id.tv_register);
         mEmail = findViewById(R.id.et_login_username);
         mPassword = findViewById(R.id.et_login_password);
         mLogin = findViewById(R.id.bt_login);
         mTextViewAlert = findViewById(R.id.tv_alert_login);
-        databaseOperations =  MemberOperations.getInstance(this);
+        databaseOperations = MemberOperations.getInstance(this);
 
     }
 
-    private boolean checkValidInput(){
+    private boolean checkValidInput() {
         stringEmail = mEmail.getText().toString();
         password = mPassword.getText().toString();
 
-        if (stringEmail.matches(Utils.EmailRegex) && password.length() > 4){
+        if (stringEmail.matches(Utils.EmailRegex) && password.length() > 4) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    private void saveInSharedPrefs(){
+    private void saveInSharedPrefs() {
         mSharedPreferences = getSharedPreferences(Utils.MyPREFERENCES, MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
-        mEditor.putString(Utils.memberEmail,stringEmail);
+        mEditor.putString(Utils.memberEmail, stringEmail);
         mEditor.putString(Utils.memberPassword, password);
         mEditor.putBoolean(Utils.isLoggedIN, true);
         mEditor.commit();

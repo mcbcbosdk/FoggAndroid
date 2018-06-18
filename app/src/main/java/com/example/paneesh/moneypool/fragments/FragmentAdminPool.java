@@ -29,6 +29,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class FragmentAdminPool extends Fragment implements MyPoolListAdapter.onPoolItemClickListener {
 
     private View mView;
+
+    private TextView mTextViewNoPoolsAlert;
+    private TextView mTextViewCreatePool;
+
     private RecyclerView mMyPoolRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private MyPoolListAdapter adapter;
@@ -36,8 +40,6 @@ public class FragmentAdminPool extends Fragment implements MyPoolListAdapter.onP
     private FloatingActionButton mFloatingActionButton;
     private MemberOperations memberOperations;
     private SharedPreferences mSharedPrefs;
-    private TextView mTextViewNoPoolsAlert;
-    private TextView mTextViewCreatePool;
     private LinearLayout mLinearLayout;
     private Intent intent;
     private Bundle bundle;
